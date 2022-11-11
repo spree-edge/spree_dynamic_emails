@@ -1,0 +1,37 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:email_templates, scope: :template) %>
+<% end %>
+
+<% if @email_templates.any? %>
+  <table class="table">
+    <thead>
+      <tr data-hook="email_template_index_headers">
+        <th><%= Spree.t(:template_name, scope: :template) %></th>
+        <th><%= Spree.t(:subject, scope: :template) %></th>
+        <th><%= Spree.t(:description, scope: :template) %> </th>
+        <th class="text-center"><%= Spree.t(:active) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @email_templates.each do |template|%>
+        <tr id="<%= spree_dom_id template %>" data-hook="email_template_index_rows">
+          <td><%= template.template_name.titleize %></td>
+          <td><%= template.subject %></td>
+          <td><%= template.description %></td>
+          <td class="text-center">
+            <%= template.active ? Spree.t(:say_yes) : Spree.t(:say_no) %>
+          </td>
+          <td class="actions text-right">
+            <%= link_to_edit(template, no_text: true) if can? :edit, template %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::EmailTemplate)) %>,
+    <%= link_to(Spree.t(:add_one), new_object_url) if can? :create, Spree::EmailTemplate %>!
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:email_template, scope: :template), spree.admin_email_templates_url %> /
+  <%= @email_template.template_name.titleize %>
+<% end %>
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:send_test_mail), test_mail_admin_email_template_path(@email_template), method: :post, class:'btn btn-success me-2', icon: 'envelope.svg', data: { disable_with: 'sending' } %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @email_template } %>
+<% if @email_template.variables.present? %>
+  <div class="clear-cache-warning alert alert-info">
+    <div>You can use following variables in the mailer for the dynamic values</div>
+     <% @email_template.variables.each do |variable| %>
+      <div class="col-5"> <%= variable.titleize %> : <span> {{ <%= variable %> }} </span></div>
+     <% end %>
+  </div>
+<% end %>
+
+<%= form_for [:admin, @email_template] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>
