@@ -1,0 +1,23 @@
+<table class="purchase" role="presentation">
+  <tr>
+    <td colspan="2">
+      <% return_authorization.return_items.awaiting_return.each do |return_item| %>
+        <tr>
+          <td class="purchase_image">
+            <%= link_to(image_tag(variant_image_url(return_item.variant)), spree_storefront_resource_url(return_item.variant.product)) %>
+          </td>
+           <td class="purchase_image">
+            x <%= return_item.inventory_unit.quantity %>
+          </td>
+          <td class="purchase_item">
+            <strong>
+              <span class="f-fallback">
+                <%= link_to raw(return_item.variant.name), spree_storefront_resource_url(return_item.variant.product) %>
+              </span>
+            </strong>
+          </td>
+        </tr>
+      <% end %>
+    </td>
+  </tr>
+</table>
