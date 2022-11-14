@@ -14,7 +14,7 @@ module Spree
     end
 
     def build_template(resource, options = {})
-      @template = ::Spree::EmailTemplate.find_by(template_name: action_name)
+      @template = current_store.email_templates.find_by(template_name: action_name)
       return unless @template.present?
 
       @subject = @template.subject

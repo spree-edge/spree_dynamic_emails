@@ -5,7 +5,7 @@ module Spree
       @order = @reimbursement.order
       current_store = @reimbursement.store || Spree::Store.default
       reimbursement_details
-      email = test ? current_store.email_setting.intercept_email : @order.email
+      email = @order.email
       mail(to: email, from: current_store.mail_from_address, subject: @subject, store_url: current_store.url)
     end
 

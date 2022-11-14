@@ -5,7 +5,7 @@ module Spree
       @order = @return_authorization.order
       current_store = @order&.store || Spree::Store.default
       return_authorization_details
-      email = test ? current_store.email_setting.intercept_email : @order.email
+      email = @order.email
       mail(to: @order.email, from: current_store.mail_from_address, subject: @subject, store_url: current_store.url)
     end
 

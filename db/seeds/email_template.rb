@@ -17,6 +17,7 @@ class EmailTemplate
     data = { 
       store_owner_notification_email: { 
         template_name: "store_owner_notification_email",
+        name: "store_owner_notification_email",
         active: true,
         subject: "#{current_store.name} received a new order",
         body:
@@ -30,9 +31,11 @@ class EmailTemplate
         variables: ["username", "user_email", "order_number", "line_items_detail", "order_total", "shipping_name", "shippment_cost", "subtotal"],
         description: 'This email is sent to store owner when new order is recieved',
         mailer_class: 'Spree::OrderMailer',
+        custom_template: false
         },
       confirm_email: {
         template_name: "confirm_email",
+        name: "confirm_email",
         active: true,
         subject: "Order Confirmation",
         body:"<p><strong>hi {{ username }} </strong>,&nbsp;</p>
@@ -45,9 +48,11 @@ class EmailTemplate
         variables: ["username", "user_email", "order_number", "line_items_detail", "order_total", "shipping_name", "shippment_cost", "subtotal"],
         description: 'This email is sent to customer when new order is placed',
         mailer_class: 'Spree::OrderMailer',
+        custom_template: false
       },
       shipped_email: {
         template_name: "shipped_email",
+        name: "shipped_email",
         active: true,
         subject: "Shipment Notification",
         body: "<p><strong>Dear {{ username }} </strong>,&nbsp;</p>
@@ -60,9 +65,11 @@ class EmailTemplate
         variables: ["username", "user_email", "order_number", "line_items_detail", "order_total", "shipping_name", "shippment_cost", "subtotal"],
         description: "This email is sent to when admin ship the order shipment",
         mailer_class: 'Spree::ShipmentMailer',
+        custom_template: false
       },
       cancel_email: {
         template_name: "cancel_email",
+        name: "cancel_email",
         active: true,
         subject: "Cancellation of Order",
         body: "<p><strong>Dear {{ username }} </strong>,&nbsp;</p>
@@ -75,9 +82,11 @@ class EmailTemplate
         variables: ["username", "user_email", "order_number", "line_items_detail", "order_total", "shipping_name", "shippment_cost", "subtotal"],
         description: "This email is sent when order is cancelled by the store",
         mailer_class: 'Spree::OrderMailer',
+        custom_template: false
       },
       return_authorization_email: {
         template_name: "return_authorization_email",
+        name: "return_authorization_email",
         active: true,
         subject: "Return Authorization of Order",
         body: "<p><strong>Dear {{ username }} </strong>,&nbsp;</p>
@@ -92,9 +101,11 @@ class EmailTemplate
         variables: ["username", "user_email", "order_number", "return_authorization_number", "return_item_details", "address1", "city", "zipcode", "phone"],
         description: "This email is sent when return authorization is created by the store",
         mailer_class: 'Spree::ReturnAuthorizationMailer',
+        custom_template: false
       },
       reimbursement_email: {
         template_name: "reimbursement_email",
+        name: "reimbursement_email",
         active: true,
         subject: "Reimbursement Order email",
         body: "<p><strong>Dear {{ username }} </strong>,&nbsp;</p>
@@ -105,6 +116,7 @@ class EmailTemplate
         variables: ["username", "user_email", "order_number", "reimbursement_item_details", "reimbursement_total"],
         description: "This email is sent when Reimbursement is created by the store",
         mailer_class: 'Spree::ReimbursementMailer',
+        custom_template: false
       }
 
     }

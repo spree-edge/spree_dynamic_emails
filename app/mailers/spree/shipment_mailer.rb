@@ -5,7 +5,7 @@ module Spree
       @order = @shipment.order
       current_store = @shipment.store
       shipment_details
-      email = test ? current_store.email_setting.intercept_email : @order.email
+      email = @order.email
       mail(to: email, from: from_address, subject: @subject, store_url: current_store.url)
     end
 

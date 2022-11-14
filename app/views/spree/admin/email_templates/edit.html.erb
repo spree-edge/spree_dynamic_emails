@@ -3,6 +3,7 @@
   <%= @email_template.template_name.titleize %>
 <% end %>
 <% content_for :page_actions do %>
+  <%= email_preview_link(@email_template) %>
   <%= button_link_to Spree.t(:send_test_mail), test_mail_admin_email_template_path(@email_template), method: :post, class:'btn btn-success me-2', icon: 'envelope.svg', data: { disable_with: 'sending' } %>
 <% end %>
 
