@@ -1,0 +1,27 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:campaigns,scope: :campaigns), spree.admin_campaigns_url %> /
+  <%= link_to @campaign.name.titleize %> /
+  <%=Spree.t(:campaign_logs,scope: :campaign_logs) %>
+<% end %>
+<table class="table">
+  <thead>
+    <tr data-hook="campaign_log_index_headers">
+      <th><%= Spree.t(:email_from,scope: :campaign_logs) %></th>
+      <th><%= Spree.t(:sent_to,scope: :campaign_logs) %></th>
+      <th><%= Spree.t(:status,scope: :campaign_logs) %></th>
+      <th><%= Spree.t(:sent_at,scope: :campaign_logs) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @campaign_logs.each do |log|%>
+      <tr id="<%= spree_dom_id log %>" data-hook="email_template_index_rows">
+        <td><%= log.email %></td>
+        <td><%= log.sent_to %></td>
+        <td><%= log.status %></td>
+        <td><%= log.sent_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @campaign_logs, theme: 'admin-twitter-bootstrap-4' %>

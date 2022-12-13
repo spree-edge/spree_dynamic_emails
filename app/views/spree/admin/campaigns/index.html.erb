@@ -1,0 +1,37 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:campaign, scope: :campaign) %>
+<% end %>
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:add_new_campaign, scope: :campaign), new_admin_campaign_path, class: "btn-success", icon: 'add.svg', id: 'admin_new_campaign' %>
+<% end if can? :create, Spree::Campaign %>
+<% if @campaigns.any? %>
+  <table class="table">
+    <thead>
+      <tr data-hook="campaign_index_headers">
+        <th><%= Spree.t(:campaign_name,scope: :campaign) %></th>
+        <th><%= Spree.t(:to,scope: :campaign) %></th>
+        <th><%= Spree.t(:rule, scope: :campaign) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @campaigns.each do |campaign|%>
+        <tr id="<%= spree_dom_id campaign %>" data-hook="email_template_index_rows">
+          <td><%= campaign.name.titleize %></td>
+          <td><%= campaign.to&.truncate(20)%></td>
+          <td><%= campaign.rule&.titleize %></td>
+          <td class="actions text-right">
+            <%= link_to_edit(campaign, no_text: true) if can? :edit, campaign %>
+            <%= link_to_delete(campaign, no_text: true) if can? :destroy, campaign %>
+             <%= link_to Spree.t(:show_logs,scope: :campaign_logs), campaign_log_admin_campaign_path(campaign),  class:'btn btn-success me-2' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Campaign)) %>,
+    <%= link_to(Spree.t(:add_one), new_object_url) if can? :create, Spree::Campaign %>!
+  </div>
+<% end %>

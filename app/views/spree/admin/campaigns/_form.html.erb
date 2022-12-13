@@ -1,0 +1,52 @@
+<% if @campaign.campaign_job_details.present? %>
+  <div class="alert alert-info">
+    <%= Spree.t(:email_already_scheduled, scope: :campaign) %>
+  </div>
+<% end %>
+<div class="row" data-hook="campaign_form_fields">
+  <div class="col-12" data-hook="name">
+    <%= f.field_container :name, class: ["form-group"], "data-hook" => "name" do %>
+      <%= f.label :name, Spree.t(:campaign_name,scope: :campaign) %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+  </div>
+  <div class="col-12" data-hook="email_to">
+    <%= f.field_container :to, class: ["form-group"], "data-hook" => "to" do %>
+      <%= f.label :to, Spree.t(:to,scope: :campaign) %>
+      <%= f.text_field :to, class: "form-control email_to", id: "email_to" %>
+      <%= f.error_message_on :to %>
+    <% end %>
+  </div>
+  <div class="col-12" data-hook="email_rules">
+    <%= f.field_container :rule, class: ["form-group"], "data-hook" => "rule" do %>
+      <%= f.label :rule, Spree.t(:rule, scope: :campaign) %>
+      <%= f.select(:rule, Spree::Campaign.rules.keys.collect { |m| m } , { include_blank: "None" }, { class: 'select2 email_rule' })%>
+      <%= f.error_message_on :rule %>
+    <% end %>
+  </div>
+  <div class="col-12" data-hook="email_template">
+    <%= f.field_container :email_template, class: ["form-group"], "data-hook" => "email_template" do %>
+      <%= f.label :email_template, Spree.t(:email_template, scope: :campaign) %>
+      <%= f.select(:email_template_id, current_store.email_templates.collect { |t| [Spree.t(t.name), t.id ] }, { include_blank: "None" }, { class: 'select2' }) %>
+      <%= f.error_message_on :email_template %>
+    <% end %>
+  </div>
+  <%= f.hidden_field :store_id, value: current_store.id %>
+</div>
+<script type="text/javascript">
+  var input = $('#email_to');
+  if (input.length >= 1) {
+    rule_present = $(".email_rule").val() != ''
+    toggleToInput(input, rule_present)
+
+    $("select.email_rule").change(function () {
+      rule_present = ($(this).children("option:selected").val() != '')
+      toggleToInput(input, rule_present)
+    });
+  }
+
+  function toggleToInput(element, disable) {
+    element.prop('disabled', disable)
+  }
+</script>

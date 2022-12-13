@@ -1,0 +1,36 @@
+<!-- Schedule Modal -->
+<div class="modal fade" id="schedule_campaign" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Your upcoming Scheduled Campaigns</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr data-hook="campaign_index_headers">
+              <th><%= Spree.t(:scheduled_at,scope: :campaign) %></th>
+              <th class="actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @campaign.campaign_job_details.each do |key, value|%>
+              <tr>
+                <td><%= value %></td>
+                <td>
+                  <%= button_link_to Spree.t(:delete, scope: :campaign), delete_jobs_admin_campaign_path(@campaign, key), method: :post,  class:'btn btn-danger me-2' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

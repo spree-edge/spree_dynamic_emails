@@ -1,0 +1,19 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:campaign, scope: :campaign), spree.admin_campaigns_url %> /
+  <%= @campaign.name.titleize %>
+<% end %>
+<% content_for :page_actions do %>
+  <button type="button" class="btn btn-success <%='d-none' unless @campaign.campaign_job_details.present? %>" data-toggle="modal" data-target="#schedule_campaign">Scheduled Campaigns</button>
+  <%= button_link_to Spree.t(:send_now, scope: :campaign), send_mail_admin_campaign_path(@campaign), method: :post,  class:'btn btn-success me-2', icon: 'envelope.svg', data: { disable_with: 'sending' } %>
+  <span class="or mt-2"><%= Spree.t(:or) %></span>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#schedule_email">Send Later</button>
+<% end %>
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @campaign } %>
+<%= form_for [:admin, @campaign] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>
+<%= render partial: 'schedule_email_modal' %>
+<%= render partial: 'scheduled_campaigns_modal' %>

@@ -1,0 +1,28 @@
+<!-- Schedule Modal -->
+<div class="modal fade" id="schedule_email" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Schedule Your Email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with model: [:admin, @campaign], url: send_mail_admin_campaign_url(@campaign), method: :post do |f| %>
+        <div class="modal-body">
+          <div data-hook="campaign_job_details">
+            <%= f.label :campaign_job_details, Spree.t(:scheduled_at) %>
+            <div class="input-group"
+              data-alt-format="<%= Spree.t(:fpr_human_friendly_date_format, scope: 'date_picker', default: 'M j, Y') %>">
+              <%= datetime_field 'campaign_job_details', nil, class: 'form-control shadow-none ', min: Time.zone.parse(Date.current.to_s) %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit Spree.t(:send_later,scope: :campaign), class:'btn btn-success me-2', icon: 'envelope.svg', data: { disable_with: 'sending' }%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
