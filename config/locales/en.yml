@@ -3,3 +3,35 @@
 
 en:
   hello: "Hello world"
+  spree:
+    template:
+      email_templates: Email Templates
+      add_new_template: Add New Template
+      template_name: Template Name
+      subject: Subject
+      email_template: Email Template
+      body: Body
+      description: Description
+      send_test_mail: Send Test Email
+      email_sent_successfully: Email has been sent successfully.
+      unable_to_send: Unable to send the email
+      email_not_active: Email Template is not active
+      preview_email: Preview Email
+    campaign:
+      campaign: Campaign
+      campaign_name: Campaign Name
+      to: Email To
+      add_new_campaign: Add New Campaign
+      rule: Rule
+      email_template: Email Template
+      send_now: Send Now
+      send_later: Send Later
+      email_scheduled_successfully: Email has been scheduled successfully.
+      email_already_scheduled: Campaigns are scheduled. To delete the campaign, first delete all the scheduled campaigns
+    campaign_logs:
+      campaign_logs: Campaign Logs
+      show_logs: Show Logs
+      email_from: Email From
+      sent_to: Sent To
+      status: Status
+      sent_at: Sent At

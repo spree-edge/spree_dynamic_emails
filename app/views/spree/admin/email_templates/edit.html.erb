@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
   <%= link_to Spree.t(:email_template, scope: :template), spree.admin_email_templates_url %> /
-  <%= @email_template.template_name.titleize %>
+  <%= @email_template.name.titleize %>
 <% end %>
 <% content_for :page_actions do %>
   <%= email_preview_link(@email_template) %>
