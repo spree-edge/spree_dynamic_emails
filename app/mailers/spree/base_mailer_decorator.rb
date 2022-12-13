@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module BaseMailerDecorator
     def self.prepended(base)
@@ -5,8 +7,8 @@ module Spree
       base.after_action :attach_metadata
     end
 
-
     private
+
     def ensure_default_action_mailer_url_host(store_url = nil)
       ActionMailer::Base.default_url_options ||= {}
       ActionMailer::Base.default_url_options[:protocol] = 'https'
@@ -23,17 +25,17 @@ module Spree
 
     def attach_metadata
       mailer_klass = self.class.to_s
-      mailer_action = self.action_name
+      mailer_action = action_name
 
-      self.message.instance_variable_set(:@store_id, current_store.id)
-      self.message.instance_variable_set(:@mailer_klass, mailer_klass)
-      self.message.instance_variable_set(:@mailer_action, mailer_action)
-      self.message.instance_variable_set(:@test, @test_mail)
+      message.instance_variable_set(:@store_id, current_store.id)
+      message.instance_variable_set(:@mailer_klass, mailer_klass)
+      message.instance_variable_set(:@mailer_action, mailer_action)
+      message.instance_variable_set(:@test, @test_mail)
 
-      self.message.class.send(:attr_reader, :store_id)
-      self.message.class.send(:attr_reader, :mailer_klass)
-      self.message.class.send(:attr_reader, :mailer_action)
-      self.message.class.send(:attr_reader, :test)
+      message.class.send(:attr_reader, :store_id)
+      message.class.send(:attr_reader, :mailer_klass)
+      message.class.send(:attr_reader, :mailer_action)
+      message.class.send(:attr_reader, :test)
     end
   end
 end
