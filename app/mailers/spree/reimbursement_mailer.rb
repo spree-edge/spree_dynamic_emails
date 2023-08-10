@@ -2,7 +2,7 @@
 
 module Spree
   class ReimbursementMailer < BaseMailer
-    def reimbursement_email(reimbursement, resend = false, test: false, id: nil, email_to: nil)
+    def reimbursement_email(reimbursement, test=false, id=nil, email_to=nil)
       @reimbursement = reimbursement.respond_to?(:id) ? reimbursement : Spree::Reimbursement.find(reimbursement)
       @test_mail = test
       @order = @reimbursement.order
