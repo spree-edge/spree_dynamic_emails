@@ -2,7 +2,7 @@
 
 module Spree
   class ReturnAuthorizationMailer < BaseMailer
-    def return_authorization_email(return_authorization, test = false, id: nil, email_to: nil)
+    def return_authorization_email(return_authorization, test= false, id= nil, email_to=nil)
       @return_authorization = return_authorization.respond_to?(:id) ? return_authorization : Spree::ReturnAuthorization.find(return_authorization)
       @test_mail = test
       @order = @return_authorization.order

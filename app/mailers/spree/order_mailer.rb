@@ -2,7 +2,7 @@
 
 module Spree
   class OrderMailer < ::Spree::BaseMailer
-    def confirm_email(order, resend = false, test: false, id: nil, email_to: nil)
+    def confirm_email(order, test=false, id=nil, email_to=nil)
       @order = order.respond_to?(:id) ? order : ::Spree::Order.find(order)
       @test_mail = test
       current_store = @order.store
@@ -11,7 +11,7 @@ module Spree
       mail(to: email, from: from_address, subject: @subject, store_url: current_store.url)
     end
 
-    def store_owner_notification_email(order, test: false, id: nil, email_to: nil)
+    def store_owner_notification_email(order, test=false, id=nil, email_to=nil)
       @order = order.respond_to?(:id) ? order : ::Spree::Order.find(order)
       @test_mail = test
       current_store = @order.store
@@ -20,7 +20,7 @@ module Spree
       mail(to: email, from: from_address, subject: @subject, store_url: current_store.url)
     end
 
-    def cancel_email(order, resend = false, test: false, id: nil, email_to: nil)
+    def cancel_email(order, test=false, id=nil, email_to=nil)
       @order = order.respond_to?(:id) ? order : ::Spree::Order.find(order)
       @test_mail = test
       current_store = @order.store
