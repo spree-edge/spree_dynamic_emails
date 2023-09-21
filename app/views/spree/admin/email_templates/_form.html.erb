@@ -6,11 +6,19 @@
       <%= f.error_message_on :name %>
     <% end %>
   </div>
-  <div class="col-12 col-lg-6" data-hook="email_subject">
-    <%= f.field_container :subject, class: ["form-group"], "data-hook" => "subject" do %>
-      <%= f.label :subject, Spree.t(:subject, scope: :template) %>
-      <%= f.text_field :subject, class: 'form-control' %>
-      <%= f.error_message_on :subject %>
+  <div class="col-12 col-lg-6" data-hook="email_template_name">
+    <%= f.field_container :template_name, class: ["form-group"], "data-hook" => "template_name" do %>
+      <%= f.label :template_name, Spree.t(:template_name) %>
+      <%= f.text_field :template_name, class: 'form-control' %>
+      <%= f.error_message_on :template_name %>
+    <% end %>
+  </div>
+
+  <div class="col-12 col-lg-6" data-hook="email_mailer_class">
+    <%= f.field_container :mailer_class, class: ["form-group"], "data-hook" => "mailer_class" do %>
+      <%= f.label :mailer_class, Spree.t(:mailer_class) %>
+      <%= f.text_field :mailer_class, class: 'form-control' %>
+      <%= f.error_message_on :mailer_class %>
     <% end %>
   </div>
   <div class="col-12 col-lg-6" data-hook="email_description">
@@ -20,8 +28,15 @@
       <%= f.error_message_on :description %>
     <% end %>
   </div>
-  <div class="col-12 col-lg-6 text-center" data-hook="email_subject">
-    <%= f.field_container :active, class: ["form-group"], "data-hook" => "subject" do %>
+  <div class="col-12 col-lg-6" data-hook="email_subject">
+    <%= f.field_container :subject, class: ["form-group"], "data-hook" => "subject" do %>
+      <%= f.label :subject, Spree.t(:subject, scope: :template) %>
+      <%= f.text_field :subject, class: 'form-control' %>
+      <%= f.error_message_on :subject %>
+    <% end %>
+  </div>
+  <div class="text-center col-12 col-lg-6" data-hook="custom_template">
+    <%= f.field_container :active, class: ["form-group "], "data-hook" => "subject" do %>
       <%= f.label :active, Spree.t(:active, scope: :template) %>
       <%= f.check_box :active, class: 'form-control' %>
       <%= f.error_message_on :active %>
@@ -30,11 +45,10 @@
   <div class='col-12' data-hook="email_template_body">
     <%= f.field_container :body do %>
       <%= f.label :body, Spree.t(:body, scope: :template) %>
-      <%= f.text_area :body, { rows: "15", class: "form-control spree-rte" } %>
+      <%= f.text_area :body, { rows: "15", class: "form-control tinymce" } %>
+      <%= tinymce %>
       <%= f.error_message_on :body %>
     <% end %>
   </div>
-  <%= f.hidden_field :custom_template %>
-  <%= f.hidden_field :template_name %>
   <%= f.hidden_field :store_id , value: current_store.id %>
 </div>

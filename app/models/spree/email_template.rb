@@ -2,6 +2,8 @@
 
 module Spree
   class EmailTemplate < ApplicationRecord
+    require 'liquid'
+
     belongs_to :store
     has_many :campaigns, dependent: :destroy
     scope :current_store, ->(current_store) { where(store_id: current_store) }
@@ -18,7 +20,7 @@ module Spree
     end
 
     def send_mail
-      mailer_class.constantize.send(template_name, record, test: true, id: id).deliver_now
+      mailer_class.constantize.send(template_name, record.try(:id), test: true, id: id).deliver_now
     end
 
     def record
@@ -38,11 +40,11 @@ module Spree
     private
 
     def confirm_email
-      order_vaiables
+      order_variables
     end
 
     def cancel_email
-      order_vaiables
+      order_variables
     end
 
     def shipped_email
@@ -50,7 +52,7 @@ module Spree
     end
 
     def store_owner_notification_email
-      order_vaiables
+      order_variables
     end
 
     def return_authorization_email
@@ -61,7 +63,7 @@ module Spree
       reimbursement_email_variables
     end
 
-    def order_vaiables
+    def order_variables
       {
         'username' => @resource.name,
         'user_email' => @resource.email,

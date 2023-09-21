@@ -5,7 +5,7 @@ module SpreeDynamicEmails
     module AbilityDecorator
       def initialize(user)
         user ||= ::Spree.user_class.new
-        if user.persisted? && user.try(:spree_admin?)
+        if user.persisted? && user.has_spree_role?(:admin)
           apply_admin_permissions(user)
         elsif user.respond_to?(:has_spree_role?) && user.has_spree_role?(:store_owner)
           apply_store_owner_permissions(user)
