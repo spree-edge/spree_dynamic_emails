@@ -19,7 +19,7 @@ module Spree
       @template = current_store.email_templates.find_by(template_name: action_name)
       return unless @template.present?
 
-      @subject = @template.subject
+      @subject = @template.render_subject(resource, options)
       @body = @template.render_body(resource, options)
     end
 

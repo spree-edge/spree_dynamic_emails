@@ -19,6 +19,14 @@ module Spree
       template.render(template_variables)
     end
 
+    def render_subject(resource, options)
+      @resource = resource
+      @options = options
+      template = ::Liquid::Template.parse(subject)
+      template_variables = send(template_name.to_s)
+      template.render(template_variables)
+    end
+
     def send_mail
       mailer_class.constantize.send(template_name, record.try(:id), test: true, id: id).deliver_now
     end
