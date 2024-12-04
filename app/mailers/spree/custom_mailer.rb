@@ -2,7 +2,7 @@
 
 module Spree
   class CustomMailer < ::Spree::BaseMailer
-    def custom_email(resend = false, test: false, id: nil, email_to: nil)
+    def custom_email(record=nil, test=false, id=nil, email_to=nil)
       @test_mail = test
       find_template(id)
       email = email_to

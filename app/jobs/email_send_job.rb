@@ -13,8 +13,8 @@ class EmailSendJob < ApplicationJob
     emails = @campaign.send(rule) if rule.present?
     emails = @campaign&.to&.split(',') unless emails.present?
     emails&.each do |to|
-      response = template.mailer_class.constantize.send(template.template_name, template.record, id: template.id,
-                                                                                                 email_to: to).deliver_now
+      response = template.mailer_class.constantize.send(template.template_name, template.record, false, template.id,
+                                                                                                  to).deliver_now
       create_log(response)
     end
   end

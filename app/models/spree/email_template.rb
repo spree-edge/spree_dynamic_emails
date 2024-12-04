@@ -18,7 +18,7 @@ module Spree
     end
 
     def send_mail
-      mailer_class.constantize.send(template_name, record, test: true, id: id).deliver_now
+      mailer_class.constantize.send(template_name, record, true, id, nil).deliver_now
     end
 
     def record
