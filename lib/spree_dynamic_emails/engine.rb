@@ -9,7 +9,7 @@ module SpreeDynamicEmails
       g.test_framework :rspec
     end
 
-    initializer 'spree_dynamic_emails.environment', before: :load_config_initializers do |_app|
+    config.after_initialize do |_app|
       SpreeDynamicEmails::Config = SpreeDynamicEmails::Configuration.new
     end
 

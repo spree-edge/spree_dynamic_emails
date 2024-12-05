@@ -20,8 +20,8 @@ class EmailSendJob < ApplicationJob
   end
 
   def create_log(response)
-    email = JSON.parse(response.from).join(', ')
-    sent_to = JSON.parse(response.to).join(', ')
+    email = response.from.join(', ')
+    sent_to = response.to.join(', ')
     date = Time.zone.parse(response.date.to_s)
     status = response.present? ? 'success' : 'fail'
     @campaign_logs = @campaign.campaign_logs.build(email: email, sent_to: sent_to, status: status, sent_at: date)

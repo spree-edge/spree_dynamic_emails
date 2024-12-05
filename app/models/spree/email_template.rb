@@ -38,11 +38,11 @@ module Spree
     private
 
     def confirm_email
-      order_vaiables
+      order_variables
     end
 
     def cancel_email
-      order_vaiables
+      order_variables
     end
 
     def shipped_email
@@ -50,7 +50,7 @@ module Spree
     end
 
     def store_owner_notification_email
-      order_vaiables
+      order_variables
     end
 
     def return_authorization_email
@@ -61,7 +61,7 @@ module Spree
       reimbursement_email_variables
     end
 
-    def order_vaiables
+    def order_variables
       {
         'username' => @resource.name,
         'user_email' => @resource.email,
