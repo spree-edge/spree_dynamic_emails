@@ -6,7 +6,7 @@ module Spree
       def send_mail
         if @campaign.email_template.active
           if params[:campaign_job_details].present?
-            schedule = Time.zone.parse(JSON.parse(params[:campaign_job_details]).join(', '))
+            schedule = Time.zone.parse(params[:campaign_job_details].join(', '))
           end
           @campaign.run(schedule)
           flash[:success] =
@@ -29,7 +29,8 @@ module Spree
 
       def delete_jobs
         job_ids = params[:format]
-        @campaign.delete_job(job_ids)
+        @campaign.campaign_job_details.delete(job_ids)
+        @campaign.save
         redirect_to edit_admin_campaign_path
       end
     end

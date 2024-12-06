@@ -8,7 +8,6 @@ module Spree
     belongs_to :email_template
     has_many :campaign_logs, dependent: :destroy
     validates :email_template_id, presence: true
-    validate :check_email_addresses
     validates :to, presence: { message: 'or rule must be present' }, unless: -> { rule.present? }
     validates :rule, presence: { message: 'or to must be present' }, unless: -> { to.present? }
     validate :check_email_addresses

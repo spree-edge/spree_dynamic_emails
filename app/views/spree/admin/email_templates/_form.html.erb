@@ -20,7 +20,7 @@
       <%= f.error_message_on :description %>
     <% end %>
   </div>
-  <div class="col-12 col-lg-6 text-center" data-hook="email_subject">
+  <div class="pl-3" data-hook="email_subject">
     <%= f.field_container :active, class: ["form-group"], "data-hook" => "subject" do %>
       <%= f.label :active, Spree.t(:active, scope: :template) %>
       <%= f.check_box :active, class: 'form-control' %>
